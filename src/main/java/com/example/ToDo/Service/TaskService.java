@@ -16,7 +16,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public Task saveTask(Task task) {
+    public Task saveTask(final Task task) {
         return taskRepository.save(task);
     }
 
@@ -24,8 +24,8 @@ public class TaskService {
         return this.taskRepository.findAll();
     }
 
-    public Task updateTask(String id, Task updatedTask) {
-        Optional<Task> OptionalTask = taskRepository.findById(id);
+    public Task updateTask(final String id,final Task updatedTask) {
+        final Optional<Task> OptionalTask = taskRepository.findById(id);
         if (OptionalTask.isPresent()) {
             Task task = OptionalTask.get();
             task.setTitle(updatedTask.getTitle());
@@ -38,12 +38,12 @@ public class TaskService {
         }
     }
 
-    public String deleteTask(String id) {
-        taskRepository.deleteById(id);
+    public String deleteTask(final String id) {
+        this.taskRepository.deleteById(id);
         return id;
     }
 
-    public Page<Task> retrieveTasks(Pageable pageable) {
+    public Page<Task> retrieveTasks(final Pageable pageable) {
         return this.taskRepository.findAll(pageable);
     }
 
